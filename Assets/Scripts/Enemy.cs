@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer enemySR;                     // Компонент SpriteRenderer врага.
     protected Animator animator;                        // Аниматор врага.
     protected Rigidbody2D rb;                           // Компонент Rigidbody врага.
-
+    
     private void Reset()
     {
         point1 = transform.position;
@@ -56,19 +57,19 @@ public class Enemy : MonoBehaviour
     {
         // Перемещение врага к цели.
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
+        if (target != point1)
+        {
+            enemySR.flipX = true;
+        }
+        else
+        {
+            enemySR.flipX = false;
+        }
         // Переключение цели, если враг достиг изначальной цели.
         if (Vector3.Distance(transform.position, target) < 0.1f)
         {
             target = target == point1 ? point2 : point1;
-            if (target != point1)
-            {
-                enemySR.flipX = true;
-            }
-            if (target != point2)
-            {
-                enemySR.flipX = false;
-            }
+           
         }
     }
 
