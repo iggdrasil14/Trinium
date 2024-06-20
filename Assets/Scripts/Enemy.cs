@@ -9,9 +9,13 @@ public class Enemy : MonoBehaviour
     public Vector3 point2;                              // Точка, одна из двух, между которыми двигается враг.
     public Vector3 target;                              // Цель (точка) к которой движется враг.
     public int health;                                  // Здоровье врага.
+    public float hightJump;
     public float speed;                                 // Скорость перемещения врага.
     public float attackDistance;                        // Дистанция атаки между врагом и Игроком.
+    public AudioClip attackSound;
     private SpriteRenderer enemySR;                     // Компонент SpriteRenderer врага.
+    private float jumpTimer;
+    private bool isDeath;
     protected Animator animator;                        // Аниматор врага.
     protected Rigidbody2D rb;                           // Компонент Rigidbody врага.
     
@@ -24,9 +28,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        enemySR = GetComponent<SpriteRenderer>();        // Инициализация SpriteRenderer.
+        rb = GetComponent<Rigidbody2D>();               // 
+        animator = GetComponent<Animator>();            // 
+        enemySR = GetComponent<SpriteRenderer>();       // Инициализация SpriteRenderer.
 
         if (enemySR == null)
         {
@@ -39,6 +43,20 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isDeath == true)
+        {
+            return;
+        }
+        // Проверка на возможность совершения прыжка.
+        if(jumpTimer <= Time.time)
+        {
+            if(Random.value <= 0.3f)
+            {
+                Jump();
+            }
+            jumpTimer = Time.time + 1f;
+        }
+
         Walk();
         // Проверка на атаку, если Игрок подошел близко.
         float distance = Vector2.Distance(transform.position, GeometryForm.Player.position);
@@ -71,11 +89,18 @@ public class Enemy : MonoBehaviour
             target = target == point1 ? point2 : point1;
            
         }
+
     }
 
     public void Death()
     {
+        animator.CrossFade("enemyDeath", 0);
+        isDeath = true;
+    }
 
+    public void CompletedDeath()
+    {
+        Destroy(gameObject);
     }
 
     public void Attack()
@@ -83,8 +108,13 @@ public class Enemy : MonoBehaviour
         animator.CrossFade("enemyAttack", 0);
     }
 
+    public void PlayAttackSound()
+    {
+        AudioSource.PlayClipAtPoint(attackSound, transform.position);
+    }
+
     public void Jump()
     {
-
+        rb.AddForce(Vector2.up * hightJump, ForceMode2D.Impulse);
     }
 }
