@@ -92,6 +92,15 @@ public class Enemy : MonoBehaviour
 
     }
 
+    public void Damage(int damage = 1)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            Death();
+        }
+    }
+
     public void Death()
     {
         animator.CrossFade("enemyDeath", 0);
@@ -116,5 +125,13 @@ public class Enemy : MonoBehaviour
     public void Jump()
     {
         rb.AddForce(Vector2.up * hightJump, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.TryGetComponent<GeometryFormHP>(out var realHP))
+        {
+            realHP.Damage();
+        }
     }
 }

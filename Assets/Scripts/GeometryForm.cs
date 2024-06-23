@@ -15,6 +15,7 @@ public class GeometryForm : MonoBehaviour
     public GeometryForm prefabFormCircle;               // Префаб, форма - круг.
     public ParticleSystem prefabSwitchFormFX;           // Спецэффект, сопровождающий изменение формы.
     public Rigidbody2D rb;                              // Ссылка на компонент Rigidbody2D.
+    protected bool isCanAttack = false;
     protected bool isGrounded = true;                   // Флаг, проверка нахождения персонажа на земле.
     protected bool isMovmentRight;
 
@@ -126,12 +127,29 @@ public class GeometryForm : MonoBehaviour
         }
     }
 
+    public virtual void Attack()
+    {
+        isCanAttack = true;
+    }
+    /// <summary>
+    /// Метод отключения
+    /// </summary>
+    public void AttackComplet()
+    {
+        isCanAttack = false;
+    }
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         isGrounded = true;
         if (collision.gameObject.tag == "Platform")
         {
             transform.SetParent(collision.transform);
+        }
+        if(isCanAttack == true && collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        {
+            isCanAttack = false;
+            enemy.Damage();
         }
     }
 

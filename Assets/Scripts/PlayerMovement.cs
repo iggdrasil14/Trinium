@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour 
 {
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 	bool dash = false;
 
 	//bool dashAxis = false;
+	public UnityEvent OnDash;
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.F))
 		{
 			dash = true;
+			OnDash.Invoke();
 		}
 
 
