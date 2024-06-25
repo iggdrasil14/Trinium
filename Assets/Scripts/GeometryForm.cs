@@ -10,6 +10,7 @@ public class GeometryForm : MonoBehaviour
 
     public float formJumpHeight;                        // Высота прыжка игрового персонажа;
     public float formSpeed;                             // Скорость перемещения игрового персонажа;
+    [SerializeField] protected PlayerMovement playerMovement;
     public GeometryForm prefabFormTriangle;             // Префаб, форма - треугольник.
     public GeometryForm prefabFormSquare;               // Префаб, форма - квадрат.
     public GeometryForm prefabFormCircle;               // Префаб, форма - круг.
@@ -35,7 +36,7 @@ public class GeometryForm : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         //Movement();
         //if (Input.GetKeyDown(KeyCode.Space))
@@ -162,7 +163,7 @@ public class GeometryForm : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "DeathZone")
         {
