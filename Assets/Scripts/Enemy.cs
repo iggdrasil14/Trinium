@@ -9,10 +9,10 @@ public class Enemy : MonoBehaviour
     public Vector3 point2;                              // Точка, одна из двух, между которыми двигается враг.
     public Vector3 target;                              // Цель (точка) к которой движется враг.
     public int health;                                  // Здоровье врага.
-    public float hightJump;
+    public float hightJump;                             // Высота прыжка
     public float speed;                                 // Скорость перемещения врага.
     public float attackDistance;                        // Дистанция атаки между врагом и Игроком.
-    public AudioClip attackSound;
+    public AudioClip attackSound;                       // Звук атаки
     private SpriteRenderer enemySR;                     // Компонент SpriteRenderer врага.
     private float jumpTimer;
     private bool isDeath;
