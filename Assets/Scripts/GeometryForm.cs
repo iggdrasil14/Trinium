@@ -7,17 +7,16 @@ public class GeometryForm : MonoBehaviour
 {
     public static Transform Player { get; private set; }
     public Parallax[] parallaxLayers;
-
-    public float formJumpHeight;                        // Высота прыжка игрового персонажа;
-    public float formSpeed;                             // Скорость перемещения игрового персонажа;
+    public float formJumpHeight;                                // Высота прыжка игрового персонажа;
+    public float formSpeed;                                     // Скорость перемещения игрового персонажа;
     [SerializeField] protected PlayerMovement playerMovement;
-    public GeometryForm prefabFormTriangle;             // Префаб, форма - треугольник.
-    public GeometryForm prefabFormSquare;               // Префаб, форма - квадрат.
-    public GeometryForm prefabFormCircle;               // Префаб, форма - круг.
-    public ParticleSystem prefabSwitchFormFX;           // Спецэффект, сопровождающий изменение формы.
-    public Rigidbody2D rb;                              // Ссылка на компонент Rigidbody2D.
+    public GeometryForm prefabFormTriangle;                     // Префаб, форма - треугольник.
+    public GeometryForm prefabFormSquare;                       // Префаб, форма - квадрат.
+    public GeometryForm prefabFormCircle;                       // Префаб, форма - круг.
+    public ParticleSystem prefabSwitchFormFX;                   // Спецэффект, сопровождающий изменение формы.
+    public Rigidbody2D rb;                                      // Ссылка на компонент Rigidbody2D.
     protected bool isCanAttack = false;
-    protected bool isGrounded = true;                   // Флаг, проверка нахождения персонажа на земле.
+    protected bool isGrounded = true;                           // Флаг, проверка нахождения персонажа на земле.
     protected bool isMovmentRight;
 
     public bool IsGrounded => isGrounded;
@@ -26,7 +25,7 @@ public class GeometryForm : MonoBehaviour
     void Start()
     {
         GeometryForm.Player = transform;
-        rb = GetComponent<Rigidbody2D>();               // Инициализация Rigidbody2D
+        rb = GetComponent<Rigidbody2D>();                       // Инициализация Rigidbody2D
         if (rb == null)
         {
             Debug.LogError("Rigidbody2D not found on " + gameObject.name);
@@ -89,19 +88,19 @@ public class GeometryForm : MonoBehaviour
     protected virtual void Transformation()
     {
         // Активация формы - треугольник.
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
         {
             TransformForm(prefabFormTriangle);
         }
 
         // Активация формы - квадрат.
-        if (Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
         {
             TransformForm(prefabFormSquare);
         }
 
         // Активация формы - круг.
-        if (Input.GetKeyDown(KeyCode.Keypad3))
+        if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
         {
             TransformForm(prefabFormCircle);
         }

@@ -34,7 +34,7 @@ public class GeometryFormSquare : GeometryForm
     protected override void Transformation()
     {
         // Активация формы - треугольник.
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
         {
             // Уничтожает текущую форму.
             Destroy(gameObject);
@@ -47,7 +47,7 @@ public class GeometryFormSquare : GeometryForm
         }
 
         // Активация формы - круг.
-        if (Input.GetKeyDown(KeyCode.Keypad3))
+        if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
         {
             // Уничтожает текущую форму.
             Destroy(gameObject);

@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 			jump = true;
 		}
 
-		if (Input.GetKeyDown(KeyCode.F))
+		if (Input.GetMouseButtonDown(0))
 		{
 			dash = true;
 			OnDash.Invoke();
@@ -41,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
         {
 			if (currentFrom is GeometryFormSquare
 					&& currentFrom.IsGrounded == false
-						&& Input.GetAxisRaw("Vertical") < 0)
+						&& Input.GetMouseButtonDown(0))
+						//&& Input.GetAxisRaw("Vertical") < 0)
 			{
 				var form = (GeometryFormSquare)currentFrom;
 				form.isCanDestroyBox = true;
