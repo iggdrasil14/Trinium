@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;									// Добавление управления с геймпада. Добавлен InputSystem.
 
 public class GeometryForm : MonoBehaviour
 {
@@ -9,17 +10,34 @@ public class GeometryForm : MonoBehaviour
     public Parallax[] parallaxLayers;
     public float formJumpHeight;                                // Высота прыжка игрового персонажа;
     public float formSpeed;                                     // Скорость перемещения игрового персонажа;
-    [SerializeField] protected PlayerMovement playerMovement;
     public GeometryForm prefabFormTriangle;                     // Префаб, форма - треугольник.
     public GeometryForm prefabFormSquare;                       // Префаб, форма - квадрат.
     public GeometryForm prefabFormCircle;                       // Префаб, форма - круг.
     public ParticleSystem prefabSwitchFormFX;                   // Спецэффект, сопровождающий изменение формы.
     public Rigidbody2D rb;                                      // Ссылка на компонент Rigidbody2D.
+    public bool IsGrounded => isGrounded;
     protected bool isCanAttack = false;
     protected bool isGrounded = true;                           // Флаг, проверка нахождения персонажа на земле.
     protected bool isMovmentRight;
+    [SerializeField] protected PlayerMovement playerMovement;
+    private InPutController control;							// Добавление управления с геймпада. Добавлена переменная control.
+    private float _moveInput;                                   // Добавление управления с геймпада. Добавление переменной _moveInput;
+    
+    private void Awake()										// Добавление управления с геймпада. Добавлен метод Awake() 
+    {
+        control = new InPutController();
+        control.Move.Jump.performed += context => Jump();
+    }
 
-    public bool IsGrounded => isGrounded;
+    private void OnEnable()                                     // Добавление управления с геймпада.
+    {
+        control.Enable();
+    }
+
+    private void OnDisable()                                    // Добавление управления с геймпада.
+    {
+        control.Disable();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -44,30 +62,35 @@ public class GeometryForm : MonoBehaviour
         //}
         Transformation();
     }
+    protected virtual void FixedUpdate()
+    {
+
+    }
 
     /// <summary>
     /// Метод, отвечающий за передвижение игрового персонажа.
     /// </summary>
-    protected virtual void Movement()
-    {
-        Vector2 velocity = rb.velocity;
-        velocity.x = 0;
-        // Перемещение вправо.
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            velocity.x = formSpeed;
-            isMovmentRight = true;
-            MoveParallax(-1);
-        }
-        // Перемещение влево.
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            velocity.x = -formSpeed;
-            isMovmentRight = false;
-            MoveParallax(1);
-        }
-        rb.velocity = velocity;
-    }
+    //protected virtual void Movement()
+    //{
+    //    _moveInput = control.Move.Move.ReadValue<float>();          // Добавление управления с геймпада. Присвоение значения для _moveInput;
+    //    Vector2 velocity = rb.velocity;
+    //    velocity.x = 0;
+    //    // Перемещение вправо.
+    //    if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || _moveInput > 0)  // Добавление управления с геймпада. Добавление условия проверки на движение вправо.
+    //    {
+    //        velocity.x = formSpeed;
+    //        isMovmentRight = true;
+    //        MoveParallax(-1);
+    //    }
+    //    // Перемещение влево.
+    //    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || _moveInput < 0)   // Добавление управления с геймпада. Добавление условия проверки на движение влево.
+    //    {
+    //        velocity.x = -formSpeed;
+    //        isMovmentRight = false;
+    //        MoveParallax(1);
+    //    }
+    //    rb.velocity = velocity;
+    //}
 
     /// <summary>
     /// Метод, отвечающий за прыжок игрового персонажа.

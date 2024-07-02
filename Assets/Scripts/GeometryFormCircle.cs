@@ -7,21 +7,21 @@ public class GeometryFormCircle : GeometryForm
     private int countNumberOfJumps;
     public float forceAdd;
 
-    protected override void Movement()
-    {
-        base.Movement();
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (isMovmentRight)
-            {
-                rb.AddForce(Vector2.right * forceAdd, ForceMode2D.Impulse);
-            }
-            else
-            {
-                rb.AddForce(Vector2.left * forceAdd, ForceMode2D.Impulse);
-            }
-        }
-    }
+    //protected override void Movement()
+    //{
+    //    base.Movement();
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        if (isMovmentRight)
+    //        {
+    //            rb.AddForce(Vector2.right * forceAdd, ForceMode2D.Impulse);
+    //        }
+    //        else
+    //        {
+    //            rb.AddForce(Vector2.left * forceAdd, ForceMode2D.Impulse);
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// Метод, отвечающий за прыжок игрового персонажа. 

@@ -87,9 +87,7 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(transform.position, target) < 0.1f)
         {
             target = target == point1 ? point2 : point1;
-           
         }
-
     }
 
     public void Damage(int damage = 1)
@@ -111,7 +109,6 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
     public void Attack()
     {
         animator.CrossFade("enemyAttack", 0);
@@ -121,7 +118,6 @@ public class Enemy : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(attackSound, transform.position);
     }
-
     public void Jump()
     {
         rb.AddForce(Vector2.up * hightJump, ForceMode2D.Impulse);

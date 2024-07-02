@@ -31,4 +31,5 @@ public class GeometryFormTriangle : GeometryForm
             Debug.Log("Активация круга");
         }
     }
+
 }

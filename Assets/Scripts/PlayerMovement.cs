@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class PlayerMovement : MonoBehaviour 
 {
+
 	public CharacterController2D controller;
 	public GeometryForm currentFrom;
 	public Animator animator;
-
 	public float runSpeed = 40f;
 
 	float horizontalMove = 0f;
@@ -17,9 +18,10 @@ public class PlayerMovement : MonoBehaviour
 
 	//bool dashAxis = false;
 	public UnityEvent OnDash;
-	
-	// Update is called once per frame
-	void Update () {
+
+
+    // Update is called once per frame
+    void Update () {
 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 

@@ -6,29 +6,24 @@ public class GeometryFormSquare : GeometryForm
 {
     public float interactiveForce;
     public bool isCanDestroyBox;
+    [SerializeField]private FixedJoint2D _fixedJoint2D;
     private bool isCanInteract;
-    private Rigidbody2D interactiveObject;
+    private RigidbodyConstraints2D _constraints;
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
         if (Input.GetKey(KeyCode.R) && isCanInteract)
         {
-            interactiveObject.bodyType = RigidbodyType2D.Dynamic;
-            if (Input.GetKey(KeyCode.A))
-            {
-                interactiveObject.velocity = Vector2.left * interactiveForce;
-                //interactiveObject.AddForce(Vector2.left * interactiveForce);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                interactiveObject.velocity = Vector2.right * interactiveForce;
-                //interactiveObject.AddForce(Vector2.right * interactiveForce);
-            }
+            _fixedJoint2D.enabled = true;
+            _fixedJoint2D.connectedBody = rb;
+            _constraints = _fixedJoint2D.GetComponent<Rigidbody2D>().constraints;
+            _fixedJoint2D.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-        else if (interactiveObject != null)
+        else if(Input.GetKeyUp(KeyCode.R) && _fixedJoint2D != null)
         {
-            interactiveObject.bodyType = RigidbodyType2D.Kinematic;
+            _fixedJoint2D.enabled = false;
+            _fixedJoint2D.connectedBody = null;
+            _fixedJoint2D.GetComponent<Rigidbody2D>().constraints = _constraints;
         }
     }
     protected override void Transformation()
@@ -81,10 +76,10 @@ public class GeometryFormSquare : GeometryForm
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
-        if(other.gameObject.tag == "BoxInteractive")
+       if(other.gameObject.tag == "BoxInteractive")
         {
             isCanInteract = true;
-            interactiveObject = other.GetComponentInParent<Rigidbody2D>();
+            _fixedJoint2D = other.GetComponentInParent<FixedJoint2D>();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -92,12 +87,8 @@ public class GeometryFormSquare : GeometryForm
         if (collision.gameObject.tag == "BoxInteractive")
         {
             isCanInteract = false;
-            if(interactiveObject != null)
-            {
-                interactiveObject.velocity = Vector2.zero;
-                interactiveObject.bodyType = RigidbodyType2D.Kinematic;
-            }
-            interactiveObject = null;
+            _fixedJoint2D = null;
+            collision.GetComponentInParent<FixedJoint2D>().enabled = false;
         }
     }
 }
