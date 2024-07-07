@@ -23,21 +23,32 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update () {
 
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+		//horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+		horizontalMove = InputManager.Instance.MoveInput.x * runSpeed;
 
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-		if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //	jump = true;
+        //}
+
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //	dash = true;
+        //	OnDash.Invoke();
+        //}
+
+        if (InputManager.Instance.JumpInput == true)
 		{
 			jump = true;
 		}
 
-		if (Input.GetMouseButtonDown(0))
+		if(InputManager.Instance.DashInput == true)
 		{
 			dash = true;
 			OnDash.Invoke();
 		}
-
 
 		if(currentFrom != null)
         {

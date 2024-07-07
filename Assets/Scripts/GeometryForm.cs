@@ -20,24 +20,24 @@ public class GeometryForm : MonoBehaviour
     protected bool isGrounded = true;                           // Флаг, проверка нахождения персонажа на земле.
     protected bool isMovmentRight;
     [SerializeField] protected PlayerMovement playerMovement;
-    private InPutController control;							// Добавление управления с геймпада. Добавлена переменная control.
-    private float _moveInput;                                   // Добавление управления с геймпада. Добавление переменной _moveInput;
+    //private InPutController control;							// Добавление управления с геймпада. Добавлена переменная control.
+    //private float _moveInput;                                   // Добавление управления с геймпада. Добавление переменной _moveInput;
     
-    private void Awake()										// Добавление управления с геймпада. Добавлен метод Awake() 
-    {
-        control = new InPutController();
-        control.Move.Jump.performed += context => Jump();
-    }
+    //private void Awake()										// Добавление управления с геймпада. Добавлен метод Awake() 
+    //{
+    //    control = new InPutController();
+    //    control.Move.Jump.performed += context => Jump();
+    //}
 
-    private void OnEnable()                                     // Добавление управления с геймпада.
-    {
-        control.Enable();
-    }
+    //private void OnEnable()                                     // Добавление управления с геймпада.
+    //{
+    //    control.Enable();
+    //}
 
-    private void OnDisable()                                    // Добавление управления с геймпада.
-    {
-        control.Disable();
-    }
+    //private void OnDisable()                                    // Добавление управления с геймпада.
+    //{
+    //    control.Disable();
+    //}
 
     // Start is called before the first frame update
     void Start()
@@ -111,19 +111,22 @@ public class GeometryForm : MonoBehaviour
     protected virtual void Transformation()
     {
         // Активация формы - треугольник.
-        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
+        //if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
+        if (InputManager.Instance.FormTriangleInput == true)
         {
             TransformForm(prefabFormTriangle);
         }
 
         // Активация формы - квадрат.
-        if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
+        //if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
+        if (InputManager.Instance.FormSquareInput == true)
         {
             TransformForm(prefabFormSquare);
         }
 
         // Активация формы - круг.
-        if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
+        //if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
+        if (InputManager.Instance.FormCircleInput == true)
         {
             TransformForm(prefabFormCircle);
         }

@@ -7,7 +7,8 @@ public class GeometryFormTriangle : GeometryForm
     protected override void Transformation()
     {
         // Активация формы - квадрат.
-        if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
+        //if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
+        if (InputManager.Instance.FormSquareInput == true)
         {
             // Уничтожает текущую форму.
             Destroy(gameObject);
@@ -20,7 +21,8 @@ public class GeometryFormTriangle : GeometryForm
         }
 
         // Активация формы - круг.
-        if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
+        //if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
+        if (InputManager.Instance.FormCircleInput == true)
         {
             // Уничтожает текущую форму.
             Destroy(gameObject);
