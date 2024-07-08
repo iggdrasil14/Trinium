@@ -17,6 +17,8 @@ public class InputManager : MonoBehaviour
     private InputAction _formTriangle;
     private InputAction _formCircle;
     private InputAction _formSquare;
+    private InputAction _dragAndPull;
+    private InputAction _startButton;
 
     public Vector2 MoveInput {  get; private set; }
     public bool JumpInput => _jumpAction.triggered;
@@ -24,6 +26,8 @@ public class InputManager : MonoBehaviour
     public bool FormTriangleInput => _formTriangle.triggered;
     public bool FormCircleInput => _formCircle.triggered;
     public bool FormSquareInput => _formSquare.triggered;
+    public bool DragAndPullInput => _dragAndPull.triggered;
+    public bool StartButtonInput => _startButton.triggered;
     private void Awake()
     {
         _inputManager = this;
@@ -34,6 +38,8 @@ public class InputManager : MonoBehaviour
         _formTriangle = inputActionsAsset.FindActionMap(map).FindAction("FormTriangle");
         _formCircle = inputActionsAsset.FindActionMap(map).FindAction("FormCircle");
         _formSquare = inputActionsAsset.FindActionMap(map).FindAction("FormSquare");
+        _dragAndPull = inputActionsAsset.FindActionMap(map).FindAction("DragAndPull");
+        _startButton = inputActionsAsset.FindActionMap(map).FindAction("StartButton");
     }
 
     private void OnEnable()
@@ -44,6 +50,8 @@ public class InputManager : MonoBehaviour
         _formTriangle.Enable();
         _formCircle.Enable(); 
         _formSquare.Enable();
+        _dragAndPull.Enable();
+        _startButton.Enable();
 
         _moveAction.performed += context => MoveInput = context.ReadValue<Vector2>();
         _moveAction.canceled += contaxt => MoveInput = Vector2.zero;
@@ -57,6 +65,8 @@ public class InputManager : MonoBehaviour
         _formTriangle.Disable();
         _formCircle.Disable();
         _formSquare.Disable();
+        _dragAndPull.Disable();
+        _startButton.Disable();
 
         _moveAction.performed -= context => MoveInput = context.ReadValue<Vector2>();
         _moveAction.canceled -= contaxt => MoveInput = Vector2.zero;

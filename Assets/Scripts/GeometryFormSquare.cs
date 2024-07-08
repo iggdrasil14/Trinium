@@ -12,14 +12,16 @@ public class GeometryFormSquare : GeometryForm
 
     protected override void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.R) && isCanInteract)
+        // if (Input.GetKey(KeyCode.R) && isCanInteract)
+        if ((InputManager.Instance.DragAndPullInput == true && isCanInteract) || Input.GetKey(KeyCode.R) && isCanInteract)
         {
             _fixedJoint2D.enabled = true;
             _fixedJoint2D.connectedBody = rb;
             _constraints = _fixedJoint2D.GetComponent<Rigidbody2D>().constraints;
             _fixedJoint2D.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-        else if(Input.GetKeyUp(KeyCode.R) && _fixedJoint2D != null)
+        //else if(Input.GetKeyUp(KeyCode.R) && _fixedJoint2D != null)
+        else if((InputManager.Instance.DragAndPullInput == true && _fixedJoint2D != null) || Input.GetKeyUp(KeyCode.R) && _fixedJoint2D != null)
         {
             _fixedJoint2D.enabled = false;
             _fixedJoint2D.connectedBody = null;

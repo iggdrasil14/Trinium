@@ -55,7 +55,7 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""FormTrianlge"",
+                    ""name"": ""FormTriangle"",
                     ""type"": ""Button"",
                     ""id"": ""f51ee3bd-08e8-4760-b1ec-a8f89dfe4cf4"",
                     ""expectedControlType"": ""Button"",
@@ -76,6 +76,24 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
                     ""name"": ""FormSquare"",
                     ""type"": ""Button"",
                     ""id"": ""ad923673-93ce-4e5b-ab4a-5905e5135ccd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DragAndPull"",
+                    ""type"": ""Button"",
+                    ""id"": ""6abfdb28-4d21-41e3-9eea-ad1cee880537"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d8f0924-f001-4a89-9e68-fcda0b909735"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -200,7 +218,7 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""FormTrianlge"",
+                    ""action"": ""FormTriangle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -211,7 +229,7 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""FormTrianlge"",
+                    ""action"": ""FormTriangle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -222,7 +240,7 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""FormTrianlge"",
+                    ""action"": ""FormTriangle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -291,6 +309,50 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
                     ""action"": ""FormSquare"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b998c17-9813-47f0-add9-d8e5b561b418"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b34df4d-ab8c-411a-ac19-6db4a53600bc"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a00a7a3e-b6c1-43db-bf67-734a23067365"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DragAndPull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64604b6c-f75c-43f0-9f66-ab5db12c923b"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DragAndPull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -325,9 +387,11 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
         m_Move_Movement = m_Move.FindAction("Movement", throwIfNotFound: true);
         m_Move_Jump = m_Move.FindAction("Jump", throwIfNotFound: true);
         m_Move_Dash = m_Move.FindAction("Dash", throwIfNotFound: true);
-        m_Move_FormTrianlge = m_Move.FindAction("FormTrianlge", throwIfNotFound: true);
+        m_Move_FormTriangle = m_Move.FindAction("FormTriangle", throwIfNotFound: true);
         m_Move_FormCircle = m_Move.FindAction("FormCircle", throwIfNotFound: true);
         m_Move_FormSquare = m_Move.FindAction("FormSquare", throwIfNotFound: true);
+        m_Move_DragAndPull = m_Move.FindAction("DragAndPull", throwIfNotFound: true);
+        m_Move_StartButton = m_Move.FindAction("StartButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -392,9 +456,11 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Move_Movement;
     private readonly InputAction m_Move_Jump;
     private readonly InputAction m_Move_Dash;
-    private readonly InputAction m_Move_FormTrianlge;
+    private readonly InputAction m_Move_FormTriangle;
     private readonly InputAction m_Move_FormCircle;
     private readonly InputAction m_Move_FormSquare;
+    private readonly InputAction m_Move_DragAndPull;
+    private readonly InputAction m_Move_StartButton;
     public struct MoveActions
     {
         private @InPutController m_Wrapper;
@@ -402,9 +468,11 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Move_Movement;
         public InputAction @Jump => m_Wrapper.m_Move_Jump;
         public InputAction @Dash => m_Wrapper.m_Move_Dash;
-        public InputAction @FormTrianlge => m_Wrapper.m_Move_FormTrianlge;
+        public InputAction @FormTriangle => m_Wrapper.m_Move_FormTriangle;
         public InputAction @FormCircle => m_Wrapper.m_Move_FormCircle;
         public InputAction @FormSquare => m_Wrapper.m_Move_FormSquare;
+        public InputAction @DragAndPull => m_Wrapper.m_Move_DragAndPull;
+        public InputAction @StartButton => m_Wrapper.m_Move_StartButton;
         public InputActionMap Get() { return m_Wrapper.m_Move; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -423,15 +491,21 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
-            @FormTrianlge.started += instance.OnFormTrianlge;
-            @FormTrianlge.performed += instance.OnFormTrianlge;
-            @FormTrianlge.canceled += instance.OnFormTrianlge;
+            @FormTriangle.started += instance.OnFormTriangle;
+            @FormTriangle.performed += instance.OnFormTriangle;
+            @FormTriangle.canceled += instance.OnFormTriangle;
             @FormCircle.started += instance.OnFormCircle;
             @FormCircle.performed += instance.OnFormCircle;
             @FormCircle.canceled += instance.OnFormCircle;
             @FormSquare.started += instance.OnFormSquare;
             @FormSquare.performed += instance.OnFormSquare;
             @FormSquare.canceled += instance.OnFormSquare;
+            @DragAndPull.started += instance.OnDragAndPull;
+            @DragAndPull.performed += instance.OnDragAndPull;
+            @DragAndPull.canceled += instance.OnDragAndPull;
+            @StartButton.started += instance.OnStartButton;
+            @StartButton.performed += instance.OnStartButton;
+            @StartButton.canceled += instance.OnStartButton;
         }
 
         private void UnregisterCallbacks(IMoveActions instance)
@@ -445,15 +519,21 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
-            @FormTrianlge.started -= instance.OnFormTrianlge;
-            @FormTrianlge.performed -= instance.OnFormTrianlge;
-            @FormTrianlge.canceled -= instance.OnFormTrianlge;
+            @FormTriangle.started -= instance.OnFormTriangle;
+            @FormTriangle.performed -= instance.OnFormTriangle;
+            @FormTriangle.canceled -= instance.OnFormTriangle;
             @FormCircle.started -= instance.OnFormCircle;
             @FormCircle.performed -= instance.OnFormCircle;
             @FormCircle.canceled -= instance.OnFormCircle;
             @FormSquare.started -= instance.OnFormSquare;
             @FormSquare.performed -= instance.OnFormSquare;
             @FormSquare.canceled -= instance.OnFormSquare;
+            @DragAndPull.started -= instance.OnDragAndPull;
+            @DragAndPull.performed -= instance.OnDragAndPull;
+            @DragAndPull.canceled -= instance.OnDragAndPull;
+            @StartButton.started -= instance.OnStartButton;
+            @StartButton.performed -= instance.OnStartButton;
+            @StartButton.canceled -= instance.OnStartButton;
         }
 
         public void RemoveCallbacks(IMoveActions instance)
@@ -494,8 +574,10 @@ public partial class @InPutController: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnFormTrianlge(InputAction.CallbackContext context);
+        void OnFormTriangle(InputAction.CallbackContext context);
         void OnFormCircle(InputAction.CallbackContext context);
         void OnFormSquare(InputAction.CallbackContext context);
+        void OnDragAndPull(InputAction.CallbackContext context);
+        void OnStartButton(InputAction.CallbackContext context);
     }
 }

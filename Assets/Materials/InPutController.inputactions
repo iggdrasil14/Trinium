@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "FormTrianlge",
+                    "name": "FormTriangle",
                     "type": "Button",
                     "id": "f51ee3bd-08e8-4760-b1ec-a8f89dfe4cf4",
                     "expectedControlType": "Button",
@@ -54,6 +54,24 @@
                     "name": "FormSquare",
                     "type": "Button",
                     "id": "ad923673-93ce-4e5b-ab4a-5905e5135ccd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DragAndPull",
+                    "type": "Button",
+                    "id": "6abfdb28-4d21-41e3-9eea-ad1cee880537",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StartButton",
+                    "type": "Button",
+                    "id": "5d8f0924-f001-4a89-9e68-fcda0b909735",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -178,7 +196,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FormTrianlge",
+                    "action": "FormTriangle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -189,7 +207,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FormTrianlge",
+                    "action": "FormTriangle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -200,7 +218,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FormTrianlge",
+                    "action": "FormTriangle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -267,6 +285,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "FormSquare",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b998c17-9813-47f0-add9-d8e5b561b418",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b34df4d-ab8c-411a-ac19-6db4a53600bc",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a00a7a3e-b6c1-43db-bf67-734a23067365",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DragAndPull",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64604b6c-f75c-43f0-9f66-ab5db12c923b",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DragAndPull",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
