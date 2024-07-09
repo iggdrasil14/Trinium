@@ -7,22 +7,6 @@ public class GeometryFormCircle : GeometryForm
     private int countNumberOfJumps;
     public float forceAdd;
 
-    //protected override void Movement()
-    //{
-    //    base.Movement();
-    //    if (Input.GetKeyDown(KeyCode.F))
-    //    {
-    //        if (isMovmentRight)
-    //        {
-    //            rb.AddForce(Vector2.right * forceAdd, ForceMode2D.Impulse);
-    //        }
-    //        else
-    //        {
-    //            rb.AddForce(Vector2.left * forceAdd, ForceMode2D.Impulse);
-    //        }
-    //    }
-    //}
-
     /// <summary>
     /// Метод, отвечающий за прыжок игрового персонажа. 
     /// </summary>
@@ -51,7 +35,6 @@ public class GeometryFormCircle : GeometryForm
             Debug.Log("Активация треугольника");
             return;
         }
-
         // Активация формы - квадрат.
         //if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
         if (InputManager.Instance.FormSquareInput == true)
@@ -65,13 +48,11 @@ public class GeometryFormCircle : GeometryForm
             Debug.Log("Активация квадрата");
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         countNumberOfJumps = 0;
         isGrounded = true;
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         isGrounded = false;

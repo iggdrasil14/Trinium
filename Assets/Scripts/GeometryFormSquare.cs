@@ -10,9 +10,9 @@ public class GeometryFormSquare : GeometryForm
     private bool isCanInteract;
     private RigidbodyConstraints2D _constraints;
 
-    protected override void FixedUpdate()
+    protected override void Update()
     {
-        // if (Input.GetKey(KeyCode.R) && isCanInteract)
+        // Добавление условий управления с геймпада и клавиатуры.
         if ((InputManager.Instance.DragAndPullInput == true && isCanInteract) || Input.GetKey(KeyCode.R) && isCanInteract)
         {
             _fixedJoint2D.enabled = true;
@@ -20,8 +20,8 @@ public class GeometryFormSquare : GeometryForm
             _constraints = _fixedJoint2D.GetComponent<Rigidbody2D>().constraints;
             _fixedJoint2D.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-        //else if(Input.GetKeyUp(KeyCode.R) && _fixedJoint2D != null)
-        else if((InputManager.Instance.DragAndPullInput == true && _fixedJoint2D != null) || Input.GetKeyUp(KeyCode.R) && _fixedJoint2D != null)
+        // Добавление условий управления с геймпада и клавиатуры.
+        else if ((InputManager.Instance.DragAndPullInput == true && _fixedJoint2D != null) || Input.GetKeyUp(KeyCode.R) && _fixedJoint2D != null)
         {
             _fixedJoint2D.enabled = false;
             _fixedJoint2D.connectedBody = null;
@@ -31,8 +31,7 @@ public class GeometryFormSquare : GeometryForm
     protected override void Transformation()
     {
         // Активация формы - треугольник.
-        //if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1)) 
-        if (InputManager.Instance.FormTriangleInput == true)
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1) || InputManager.Instance.FormTriangleInput == true)
         {
             // Уничтожает текущую форму.
             Destroy(gameObject);
@@ -45,8 +44,7 @@ public class GeometryFormSquare : GeometryForm
         }
 
         // Активация формы - круг.
-        //if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
-        if (InputManager.Instance.FormCircleInput == true)
+        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3) || InputManager.Instance.FormCircleInput == true)
         {
             // Уничтожает текущую форму.
             Destroy(gameObject);

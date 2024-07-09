@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
     public bool FormSquareInput => _formSquare.triggered;
     public bool DragAndPullInput => _dragAndPull.triggered;
     public bool StartButtonInput => _startButton.triggered;
-    private void Awake()
+    private void Start()
     {
         _inputManager = this;
         string map = "Move";
@@ -40,15 +40,12 @@ public class InputManager : MonoBehaviour
         _formSquare = inputActionsAsset.FindActionMap(map).FindAction("FormSquare");
         _dragAndPull = inputActionsAsset.FindActionMap(map).FindAction("DragAndPull");
         _startButton = inputActionsAsset.FindActionMap(map).FindAction("StartButton");
-    }
 
-    private void OnEnable()
-    {
         _moveAction.Enable();
         _jumpAction.Enable();
         _dashAction.Enable();
         _formTriangle.Enable();
-        _formCircle.Enable(); 
+        _formCircle.Enable();
         _formSquare.Enable();
         _dragAndPull.Enable();
         _startButton.Enable();
@@ -57,7 +54,7 @@ public class InputManager : MonoBehaviour
         _moveAction.canceled += contaxt => MoveInput = Vector2.zero;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _moveAction.Disable();
         _jumpAction.Disable();
@@ -70,5 +67,13 @@ public class InputManager : MonoBehaviour
 
         _moveAction.performed -= context => MoveInput = context.ReadValue<Vector2>();
         _moveAction.canceled -= contaxt => MoveInput = Vector2.zero;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void Ininitialize()
+    {
+        var inputManager = new GameObject(nameof(InputManager)).AddComponent<InputManager>();
+        inputManager.inputActionsAsset = Resources.Load<InputActionAsset>("InPutController");
+        GameObject.DontDestroyOnLoad(inputManager);
     }
 }
