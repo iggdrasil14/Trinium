@@ -13,7 +13,7 @@ public class GeometryFormSquare : GeometryForm
     protected override void Update()
     {
         // Добавление условий управления с геймпада и клавиатуры.
-        if ((InputManager.Instance.DragAndPullInput == true && isCanInteract) || Input.GetKey(KeyCode.R) && isCanInteract)
+        if (InputManager.Instance.DragAndPullInput == true && isCanInteract)
         {
             _fixedJoint2D.enabled = true;
             _fixedJoint2D.connectedBody = rb;
@@ -21,7 +21,7 @@ public class GeometryFormSquare : GeometryForm
             _fixedJoint2D.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         // Добавление условий управления с геймпада и клавиатуры.
-        else if ((InputManager.Instance.DragAndPullInput == true && _fixedJoint2D != null) || Input.GetKeyUp(KeyCode.R) && _fixedJoint2D != null)
+        else if (InputManager.Instance.DragAndPullInput == true && _fixedJoint2D != null)
         {
             _fixedJoint2D.enabled = false;
             _fixedJoint2D.connectedBody = null;
@@ -31,7 +31,7 @@ public class GeometryFormSquare : GeometryForm
     protected override void Transformation()
     {
         // Активация формы - треугольник.
-        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1) || InputManager.Instance.FormTriangleInput == true)
+        if (InputManager.Instance.FormTriangleInput == true)
         {
             // Уничтожает текущую форму.
             Destroy(gameObject);
@@ -39,12 +39,11 @@ public class GeometryFormSquare : GeometryForm
             Instantiate(prefabSwitchFormFX, transform.position, Quaternion.identity);
             // Активирует форму - треугольник.
             Instantiate(prefabFormTriangle, transform.position, Quaternion.identity);
-            Debug.Log("Активация треугольника");
             return;
         }
 
         // Активация формы - круг.
-        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3) || InputManager.Instance.FormCircleInput == true)
+        if (InputManager.Instance.FormCircleInput == true)
         {
             // Уничтожает текущую форму.
             Destroy(gameObject);
@@ -52,9 +51,7 @@ public class GeometryFormSquare : GeometryForm
             Instantiate(prefabSwitchFormFX, transform.position, Quaternion.identity);
             // Активирует форму - круг.
             Instantiate(prefabFormCircle, transform.position, Quaternion.identity);
-            Debug.Log("Активация круга");
         }
-
     }
 
     public void LandingOnCollider(Collider2D collider)

@@ -23,10 +23,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update () 
 	{
-
-		//horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 		horizontalMove = InputManager.Instance.MoveInput.x * runSpeed;
-
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
 		if(Input.GetKey(KeyCode.LeftShift))
@@ -61,23 +58,6 @@ public class PlayerMovement : MonoBehaviour
 				//dash = true;
 			}
 		}
-
-		
-
-		/*if (Input.GetAxisRaw("Dash") == 1 || Input.GetAxisRaw("Dash") == -1) //RT in Unity 2017 = -1, RT in Unity 2019 = 1
-		{
-			if (dashAxis == false)
-			{
-				dashAxis = true;
-				dash = true;
-			}
-		}
-		else
-		{
-			dashAxis = false;
-		}
-		*/
-
 	}
 
 	public void OnFall()

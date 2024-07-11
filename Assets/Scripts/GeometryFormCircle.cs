@@ -23,7 +23,6 @@ public class GeometryFormCircle : GeometryForm
     protected override void Transformation()
     {
         // Активация формы - треугольник.
-        //if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
         if (InputManager.Instance.FormTriangleInput == true)
         {
             // Уничтожает текущую форму.
@@ -32,11 +31,9 @@ public class GeometryFormCircle : GeometryForm
             Instantiate(prefabSwitchFormFX, transform.position, Quaternion.identity);
             // Активирует форму - треугольник.
             Instantiate(prefabFormTriangle, transform.position, Quaternion.identity);
-            Debug.Log("Активация треугольника");
             return;
         }
         // Активация формы - квадрат.
-        //if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
         if (InputManager.Instance.FormSquareInput == true)
         {
             // Уничтожает текущую форму.
@@ -45,7 +42,6 @@ public class GeometryFormCircle : GeometryForm
             Instantiate(prefabSwitchFormFX, transform.position, Quaternion.identity);
             // Активирует форму - квадрат.
             Instantiate(prefabFormSquare, transform.position, Quaternion.identity);
-            Debug.Log("Активация квадрата");
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

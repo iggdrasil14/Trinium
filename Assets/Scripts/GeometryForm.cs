@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;									// Добавление управления с геймпада. Добавлен InputSystem.
 
 public class GeometryForm : MonoBehaviour
 {
@@ -43,7 +42,6 @@ public class GeometryForm : MonoBehaviour
     {
 
     }
-
     protected virtual void Jump()
     {
         if (isGrounded == false)
@@ -60,21 +58,18 @@ public class GeometryForm : MonoBehaviour
     protected virtual void Transformation()
     {
         // Активация формы - треугольник.
-        //if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
         if (InputManager.Instance.FormTriangleInput == true)
         {
             TransformForm(prefabFormTriangle);
         }
 
         // Активация формы - квадрат.
-        //if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
         if (InputManager.Instance.FormSquareInput == true)
         {
             TransformForm(prefabFormSquare);
         }
 
         // Активация формы - круг.
-        //if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
         if (InputManager.Instance.FormCircleInput == true)
         {
             TransformForm(prefabFormCircle);
@@ -113,7 +108,6 @@ public class GeometryForm : MonoBehaviour
     {
         isCanAttack = false;
     }
-
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         isGrounded = true;
@@ -127,7 +121,6 @@ public class GeometryForm : MonoBehaviour
             enemy.Damage();
         }
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         isGrounded = false;
@@ -136,7 +129,6 @@ public class GeometryForm : MonoBehaviour
             transform.SetParent(null);
         }
     }
-
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "DeathZone")
@@ -144,7 +136,6 @@ public class GeometryForm : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
-
     private void MoveParallax(int side)
     {
         for (int i = 0; i < parallaxLayers.Length; i++)
