@@ -12,6 +12,7 @@ public class GeometryFormSquare : GeometryForm
 
     protected override void Update()
     {
+        base.Update();
         // Добавление условий управления с геймпада и клавиатуры.
         if (InputManager.Instance.DragAndPullInput == true && isCanInteract)
         {

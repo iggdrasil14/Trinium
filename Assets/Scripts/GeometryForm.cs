@@ -19,10 +19,17 @@ public class GeometryForm : MonoBehaviour
     protected bool isGrounded = true;                           // Флаг, проверка нахождения персонажа на земле.
     protected bool isMovmentRight;
     [SerializeField] protected PlayerMovement playerMovement;
+    private Trigger _trigger;
    
     // Start is called before the first frame update
     void Start()
     {
+        //Saves saves = new Saves();
+        //saves.score = 10;
+        //Saves.Save(saves);
+        //Saves saves = Saves.Load();
+        //Debug.Log(saves.score);
+        
         GeometryForm.Player = transform;
         rb = GetComponent<Rigidbody2D>();                       // Инициализация Rigidbody2D
         if (rb == null)
@@ -37,6 +44,10 @@ public class GeometryForm : MonoBehaviour
     protected virtual void Update()
     {
         Transformation();
+        if (_trigger != null && InputManager.Instance.DragAndPullInput)
+        {
+            _trigger.Execute();
+        }
     }
     protected virtual void FixedUpdate()
     {
@@ -135,6 +146,11 @@ public class GeometryForm : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        other.gameObject.TryGetComponent<Trigger>(out _trigger);
+    }
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+        _trigger = null;
     }
     private void MoveParallax(int side)
     {
